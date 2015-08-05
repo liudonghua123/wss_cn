@@ -2,28 +2,36 @@
 
 ### Notice
 
-To run this docker image, you need to specify at least 5 environment variables: MYSQL_PORT_3306_TCP_ADDR/MYSQL_ENV_USERNAME/MYSQL_ENV_PASSWORD/MYSQL_ENV_DATABASE/YOUR_EXPORTED_PORT.
+To run this docker image, you need to specify at least these environment variables:
+
+- MYSQL_PORT_3306_TCP_ADDR
+- MYSQL_ENV_USERNAME
+- MYSQL_ENV_PASSWORD
+- MYSQL_ENV_DATABASE
 
 ### How to use
 
-- Run with environment variables passed using `docker run`
+Set the environment variables using export on bash
 
-	```bash
+```
+export MYSQL_PORT_3306_TCP_ADDR=<your_mysql_host>
+export MYSQL_ENV_USERNAME=<your_mysql_username>
+......
+```
+Or filling its value in docker-compose.yml file.
+
+Then run the following command
+
+```
+# you can also modify the exported port in this file
+docker-compose up
+```
+
+Also you can run directly using `docker run`
+
+```
 sudo docker run -d --restart=always -e 'MYSQL_PORT_3306_TCP_ADDR=<YOUR_MYSQL_HOST>' -e 'MYSQL_ENV_USERNAME=<YOUR_MYSQL_USERNAME>' -e 'MYSQL_ENV_PASSWORD=<YOUR_MYSQL_PASSWORD>' -e 'MYSQL_ENV_DATABASE=<YOUR_MYSQL_DATABASE>' -p <YOUR_EXPORTED_PORT>:80 ynuae/wss_cn
 ```
 
-	Replace **<YOUR_MYSQL_HOST>\<YOUR_MYSQL_USERNAME>\<YOUR_MYSQL_DATABASE>\<YOUR_MYSQL_PASSWORD>\<YOUR_EXPORTED_PORT>** according to your real situation.
+Replace **<YOUR_MYSQL_HOST>\<YOUR_MYSQL_USERNAME>\<YOUR_MYSQL_DATABASE>\<YOUR_MYSQL_PASSWORD>\<YOUR_EXPORTED_PORT>** according to your real situation.
 
-- Run with environment variables passed using `docker --link`, see more detais on [dockerlinks](http://docs.docker.com/userguide/dockerlinks/)
-	
-	If your mysql was running in a docker container in the same host which you run wss_cn, you do not need to expose the port 3306 or else.
-	
-	```bash
-	docker run -d --name mysql mysql
-	```
-	
-	Then run the wss_cn using the following command(you do not need specify MYSQL_PORT_3306_TCP_ADDR environment variable)
-	
-	```bash
-	docker run -d -e 'MYSQL_ENV_USERNAME=<YOUR_MYSQL_USERNAME>' -e 'MYSQL_ENV_PASSWORD=<YOUR_MYSQL_PASSWORD>' -e 'MYSQL_ENV_DATABASE=<YOUR_MYSQL_DATABASE>' --name my_wss --link mysql -p <YOUR_EXPORTED_PORT>:80 ynuae/wss_cn
-	```

@@ -1,0 +1,13 @@
+app:
+    image: ynuae/wss_cn
+    ports:
+     - "80:80"
+    restart: always
+    environment:
+     # the following seven environment variables are needed to run this app, set them on the base using export command
+     # or filling its value in this file
+     - MYSQL_PORT_3306_TCP_ADDR
+     - MYSQL_ENV_USERNAME
+     - MYSQL_ENV_PASSWORD
+     - MYSQL_ENV_DATABASE
+
