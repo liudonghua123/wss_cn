@@ -23,8 +23,11 @@ Or filling its value in docker-compose.yml file.
 Then run the following command
 
 ```
-# you can also modify the exported port in this file
-docker-compose up
+# download the docker-compose.yml file to get `docker-compose` to run
+wget https://raw.githubusercontent.com/ynu/wss_cn/master/README.md
+# you can customize the exported port in this file
+# and finally run the following command to start the container
+docker-compose up -d
 ```
 
 Also you can run directly using `docker run`
